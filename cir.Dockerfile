@@ -6,7 +6,7 @@ COPY . .
 
 RUN go mod download
 
-RUN go build -o /cir
+RUN go build -o cir
 
 # Tells Docker which network port your container listens on
 EXPOSE 9222

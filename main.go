@@ -272,7 +272,7 @@ summary {
 							mimetype := mimetype.Detect(s.b).String()
 							if mimetype == "application/octet-stream" {
 								ext := strings.TrimPrefix(filepath.Ext(r.URL.Path), ".")
-								log.Debug("checking extension %s", ext)
+								log.Debugf("checking extension %s", ext)
 								mimetype = filetype.GetType(ext).MIME.Value
 							}
 							w.Header().Set("Content-Type", mimetype)
