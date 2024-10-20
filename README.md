@@ -31,7 +31,7 @@ This stream is now accessible at `localhost:9222/test.mp3`. The `?stream=true` f
 First install Go.
 
 ```
-go install -v github.com/schollz/broadcast-server@latest
+go install -v github.com/aidanreilly/cork-internet-radio-server@latest
 ```
 
 ## License

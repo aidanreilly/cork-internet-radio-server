@@ -1,4 +1,4 @@
-module github.com/schollz/broadcast-server
+module github.com/aidanreilly/cork-internet-radio-server
 
 go 1.17
 
