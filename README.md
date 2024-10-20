@@ -20,7 +20,7 @@ The image will be available at `localhost:9222/test.png`.
 
 You can POST an audio stream to the server for any number of clients to consume it. For example, you can `curl` a local music stream and then POST it:
 
-```
+```cmd
 curl http://<someurl>/radio.mp3 | curl -k -H "Transfer-Encoding: chunked" -X POST -T -  'localhost:9222/test.mp3?stream=true'
 ```
 
@@ -30,8 +30,21 @@ This stream is now accessible at `localhost:9222/test.mp3`. The `?stream=true` f
 
 First install Go.
 
-```
+```cmd
 go install -v github.com/aidanreilly/cork-internet-radio-server@latest
+```
+
+## Hacking
+
+```cmd
+go mod tidy
+go mod download
+go build -o cir
+```
+
+Build the container
+```cmd
+podman build cir.Dockerfile
 ```
 
 ## License
