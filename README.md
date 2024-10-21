@@ -2,7 +2,6 @@
 
 A simple Go server that broadcasts any data/stream. Read more about it [on my blog](https://schollz.com/blog/radio/). The code was written based of [schollz/duct](https://github.com/schollz/duct), which is a fork of of [patchbay-pub](https://github.com/patchbay-pub/patchbay-simple-server).
 
-
 ## Usage
 
 ### Sending data
@@ -24,11 +23,15 @@ You can POST an audio stream to the server for any number of clients to consume 
 curl https://stream-relay-geo.ntslive.net/stream | curl -k -H "Transfer-Encoding: chunked" -X POST -T -  'localhost:9222/test.mp3?stream=true'
 ```
 
-This stream is now accessible at `localhost:9222/test.mp3`. The `?stream=true` flag is important to tell the server to start reading bytes right awawy, even if there is no listener. It has the benefit of immediately sending data to *all listeners* so that you can have multiple connections on that will all receive the data. 
+This stream is now accessible at `localhost:9222/test.mp3`. The `?stream=true` flag is important to tell the server to start reading bytes right away, even if there is no listener. It has the benefit of immediately sending data to *all listeners* so that you can have multiple connections on that will all receive the data. 
 
 ## Advertising the stream
 
 Another useful flag for streaming is `advertise=true` which will advertise the stream on the main page.
+
+```cmd
+curl https://stream-relay-geo.ntslive.net/stream | curl -k -H "Transfer-Encoding: chunked" -X POST -T - 'localhost:9222/test.mp3?stream=true&advertise=true'
+```
 
 ## Archiving the live stream
 
@@ -52,7 +55,9 @@ go mod download
 go build -o cir
 ```
 
-## Build and push container to docker.io
+## Build and push containers to docker.io
+
+cir
 ```cmd
 podman login docker.io
 
@@ -61,6 +66,12 @@ podman push oootini/cork-internet-radio-server:latest-arm64
 
 podman build -t oootini/cork-internet-radio-server:latest-amd64 -f cir.Dockerfile --platform linux/amd64
 podman push oootini/cork-internet-radio-server:latest-amd64
+```
+
+Configure a reverse proxy to ensure that no one connects directly to the website server.
+```cmd
+podman build -t oootini/nginx-reverse-proxy:latest-arm64 -f nginx-reverse-proxy.Dockerfile --platform linux/arm64
+podman push oootini/nginx-reverse-proxy:latest-arm64
 ```
 
 ## License

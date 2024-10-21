@@ -163,7 +163,7 @@ summary {
 				Rand     string
 				Archived []ArchivedFile
 			}{
-				Title:    "Current broadcasts",
+				Title:    "Current Cork internet radio broadcasts",
 				Items:    adverts,
 				Rand:     fmt.Sprintf("%d", rand.Int31()),
 				Archived: listArchived(active),
