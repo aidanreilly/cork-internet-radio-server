@@ -99,7 +99,7 @@ summary {
 			</style>
 		</head>
 		<body>
-				<h1>Current broadcasts:</h1>
+				<h1>Broadcasting live:</h1>
 				{{range .Items}}<a href="/{{ . }}">{{ . }}</a><br> <audio controls preload="none">
 					<source src="/{{ . }}?r={{$.Rand}}" type="audio/mpeg">
 					Your browser does not support the audio element.
@@ -163,7 +163,7 @@ summary {
 				Rand     string
 				Archived []ArchivedFile
 			}{
-				Title:    "Current broadcasts",
+				Title:    "Cork community internet radio",
 				Items:    adverts,
 				Rand:     fmt.Sprintf("%d", rand.Int31()),
 				Archived: listArchived(active),
