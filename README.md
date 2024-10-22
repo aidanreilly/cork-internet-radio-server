@@ -45,6 +45,10 @@ First install Go, then:
 
 ```cmd
 go install -v github.com/aidanreilly/cork-internet-radio-server@latest
+
+#launch the executable
+$HOME/go/bin/cork-internet-radio-server
+[info]  2024/10/22 14:03:40 running on port 9222
 ```
 
 ## Build locally
@@ -68,7 +72,7 @@ podman build -t oootini/cork-internet-radio-server:latest-amd64 -f cir.Dockerfil
 podman push oootini/cork-internet-radio-server:latest-amd64
 ```
 
-Configure a reverse proxy to ensure that no one connects directly to the stream server.
+Configure a reverse proxy
 ```cmd
 podman build -t oootini/nginx-reverse-proxy:latest-arm64 -f nginx-reverse-proxy.Dockerfile --platform linux/arm64
 podman push oootini/nginx-reverse-proxy:latest-arm64
