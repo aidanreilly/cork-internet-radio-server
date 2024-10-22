@@ -15,7 +15,10 @@ jobs:
 
     - name: Create release
       run: |
+        if gh release view latest; then
+          gh release delete latest --yes
+        fi
         zip -r latest.zip .
-        gh release create --latest 'latest.zip' --title latest 
+        gh release create latest 'latest.zip' --title latest
       env:
-        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
