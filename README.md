@@ -78,6 +78,36 @@ podman build -t oootini/nginx-reverse-proxy:latest-arm64 -f nginx-reverse-proxy.
 podman push oootini/nginx-reverse-proxy:latest-arm64
 ```
 
+Build an icecast2 server
+```cmd
+podman build -t oootini/icecast2:latest-arm64 -f icecast2.Dockerfile --platform linux/arm64
+podman push oootini/icecast2:latest-arm64
+
+podman build -t oootini/icecast2:latest-amd64 -f icecast2.Dockerfile --platform linux/amd64
+podman push oootini/icecast2:latest-amd64
+```
+
+```cmd
+podman run --name icecast2 -d --restart=always \
+--publish 9222:9222 \
+--replace \
+--privileged \
+--volume "$(pwd)/icecast.xml:/etc/icecast2/icecast.xml:Z" \
+oootini/icecast2:latest-arm64
+```
+
+Server is up on http://192.168.1.60:8000/admin/stats
+
+Test the stream:
+```cmd
+ffmpeg -re -stream_loop -1 -i ./windows-95-startup.mp3 -f mp3 icecast://source:password@192.168.1.201:8000/radio
+```
+
+Stream is up:
+```
+http://192.168.1.201:8000/radio
+```
+
 ## License
 
 MIT
