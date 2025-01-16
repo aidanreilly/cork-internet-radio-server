@@ -100,12 +100,12 @@ Server is up on http://192.168.1.60:8000/admin/stats
 
 Test the stream:
 ```cmd
-ffmpeg -re -stream_loop -1 -i ./windows-95-startup.mp3 -f mp3 icecast://source:password@192.168.1.201:8000/radio
+ffmpeg -re -stream_loop -1 -i ./windows-95-startup.mp3 -f mp3 icecast://source:password@192.168.1.60:9222/radio
 ```
 
 Stream is up:
 ```
-http://192.168.1.201:8000/radio
+http://192.168.1.60:9222/radio
 ```
 
 ## License
